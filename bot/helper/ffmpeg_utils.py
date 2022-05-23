@@ -36,7 +36,7 @@ def encode(filepath):
             video_opts = '-c:v copy -tag:v hvc1'
     else:
         # Transcode to h265 / hvc1
-        video_opts = '-c:v libx265 -crf 28 -tag:v hvc1 -preset fast -threads 8'
+        video_opts = 'ffmpeg -i "{}" -vf scale=1280:720 -c:v libx265 -preset medium -profile main10 -crf 24.5 -pix_fmt yuv420p10le -c:a aac -b:a 128K "{}"'
     # Get the audio channel codec
     audio_codec = get_codec(filepath, channel='a:0')
     if audio_codec == []:
